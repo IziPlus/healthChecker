@@ -4,8 +4,8 @@ using System.Text;
 
 namespace HealthChecker.Servers
 {
-    public abstract class Server
+    public interface IServer
     {
-        public abstract bool HealthCheck();
+       bool HealthCheck();
     }
 }

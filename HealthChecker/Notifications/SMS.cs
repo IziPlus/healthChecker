@@ -4,17 +4,18 @@ using System.Text;
 
 namespace HealthChecker.Notifications
 {
-    class SMS : Notification
+    public class SMS : INotification
     {
         public SMS(string mobileNumber)
         {
             MobileNumber = mobileNumber;
         }
-        public string MobileNumber { get; set; }
 
-        public override void SendAlarm()
+        public string MobileNumber { get; }
+
+        public string SendAlarm()
         {
-            Console.WriteLine("Send SMS To :" + MobileNumber);
+            return "Send SMS To :" + MobileNumber;
         }
     }
 }

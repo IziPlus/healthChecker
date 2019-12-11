@@ -4,11 +4,11 @@ using System.Text;
 
 namespace HealthChecker.Servers
 {
-    class FileServer : Server
+    class FileServer : IServer
     {
-        public override bool HealthCheck()
+        public bool HealthCheck()
         {
-            return true;
+            throw new NotImplementedException();
         }
     }
 }

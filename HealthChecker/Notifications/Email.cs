@@ -4,16 +4,17 @@ using System.Text;
 
 namespace HealthChecker.Notifications
 {
-    class EMail : Notification
+    public class EMail : INotification
     {
         public EMail(string emailAdress)
         {
             EmailAdress = emailAdress;
         }
         private string EmailAdress { get; set; }
-        public override void SendAlarm()
+
+        public string SendAlarm()
         {
-            Console.WriteLine("EmailSent to :" + EmailAdress);
+            return "EmailSent to :" + EmailAdress;
         }
     }
 }

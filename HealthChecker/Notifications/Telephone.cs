@@ -4,18 +4,18 @@ using System.Text;
 
 namespace HealthChecker.Notifications
 {
-    class Telephone : Notification
+    class Telephone : INotification
     {
-        private string TelNumber { get; set; }
+        public string TelNumber { get; }
 
         public Telephone(string telNumber)
         {
             TelNumber = telNumber;
         }
 
-        public override void SendAlarm()
+        public string SendAlarm()
         {
-            Console.WriteLine("Call With :" + TelNumber);
+            return "Call With :" + TelNumber;
         }
     }
 }

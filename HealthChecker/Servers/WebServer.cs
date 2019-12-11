@@ -4,13 +4,13 @@ using System.Text;
 
 namespace HealthChecker.Servers
 {
-    class WebServer : Server
+    class WebServer : IServer
     {
-        public int Port { get; private set; }
+        public int Port { get; }
 
-        public override bool HealthCheck()
+        public bool HealthCheck()
         {
-            return false; 
+            throw new NotImplementedException();
         }
     }
 }

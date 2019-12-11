@@ -4,8 +4,8 @@ using System.Text;
 
 namespace HealthChecker.Notifications
 {
-    abstract class Notification
+    public interface INotification
     {
-        public abstract void SendAlarm();
+        string SendAlarm();
     }
 }
