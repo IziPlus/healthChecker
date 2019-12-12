@@ -9,13 +9,15 @@ namespace HealthChecker.Notifications
         public SMS(string mobileNumber)
         {
             MobileNumber = mobileNumber;
+            SuccessTextResult = "Send SMS To :" + mobileNumber;
         }
 
         public string MobileNumber { get; }
+        public string SuccessTextResult { get; }
 
         public string SendAlarm()
         {
-            return "Send SMS To :" + MobileNumber;
+            return SuccessTextResult;
         }
     }
 }

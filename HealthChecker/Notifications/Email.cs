@@ -9,12 +9,15 @@ namespace HealthChecker.Notifications
         public EMail(string emailAdress)
         {
             EmailAdress = emailAdress;
+            SuccessTextResult = "EmailSent to :" + EmailAdress;
         }
-        private string EmailAdress { get; set; }
+        private string EmailAdress { get; }
+
+        public string SuccessTextResult { get; }
 
         public string SendAlarm()
         {
-            return "EmailSent to :" + EmailAdress;
+            return SuccessTextResult;
         }
     }
 }

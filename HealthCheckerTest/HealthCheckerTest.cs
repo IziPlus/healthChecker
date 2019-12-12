@@ -1,6 +1,4 @@
-using System;
 using Xunit;
-using HealthChecker;
 using HealthChecker.Servers;
 using HealthChecker.Notifications;
 using System.Collections.Generic;
@@ -9,9 +7,8 @@ namespace HealthCheckerTest
 {
     public class HealthCheckerTest
     {
-        
         [Fact]
-        public void Test1()
+        public void HealthCheckForDbServer()
         {
             var connectionString = "Server=myServerAddress;Database=myDataBase;User Id=myUsername;Password = myPassword;";
             var dBQuery = "SELECT COUNT(*) FROM sys.dm_os_performance_counters";
@@ -20,18 +17,60 @@ namespace HealthCheckerTest
 
             var sms = new SMS("09936386808");
 
-            var email = new EMail("reza.izi@chmail.ir");
+            var notifications = new List<INotification> { sms };
 
-            var notifications = new List<INotification> { sms, email };
+            var healthCheckerInstance = new HealthChecker.HealthChecker(server, notifications);
 
-            var healthCheckerIntanse = new HealthChecker.HealthChecker((IServer)server, notifications);
-
-            if (!healthCheckerIntanse.Server.HealthCheck())
-                healthCheckerIntanse.Notifications.ForEach(x =>
+            if (!healthCheckerInstance.Server.HealthCheck())
+                healthCheckerInstance.Notifications.ForEach(x =>
                 {
                     var result = x.SendAlarm();
-                    Assert.NotEqual("",result);
+                    Assert.Equal(sms.SuccessTextResult , result);
                 });
         }
+
+        [Fact]
+        public void HealthCheckForFileServer()
+        {
+            var destinationPath = "C://1.txt";
+
+            var server = new FileServer(destinationPath);
+
+            var eMail = new EMail("Reza.izi@chmail.ir");
+
+            var notifications = new List<INotification> { eMail };
+
+            var healthCheckerInstance = new HealthChecker.HealthChecker(server, notifications);
+
+            if (!healthCheckerInstance.Server.HealthCheck())
+                healthCheckerInstance.Notifications.ForEach(x =>
+                {
+                    var result = x.SendAlarm();
+                    Assert.Equal(eMail.SuccessTextResult, result);
+                });
+        }
+
+
+        [Fact]
+        public void HealthCheckForWebServer()
+        {
+            var url = "www.google.com";
+
+            var server = new WebServer(url);
+
+            var telephone = new Telephone("02133252194");
+
+            var notifications = new List<INotification> { telephone };
+
+            var healthCheckerInstance = new HealthChecker.HealthChecker(server, notifications);
+
+            if (!healthCheckerInstance.Server.HealthCheck())
+                healthCheckerInstance.Notifications.ForEach(x =>
+                {
+                    var result = x.SendAlarm();
+                    Assert.Equal(telephone.SuccessTextResult, result);
+                });
+        }
+
     }
 }

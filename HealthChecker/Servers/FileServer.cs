@@ -1,14 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
+﻿
 namespace HealthChecker.Servers
 {
-    class FileServer : IServer
+    public class FileServer : IServer
     {
+        public FileServer(string destinationPath)
+        {
+            DestinationPath = destinationPath;
+        }
+        public string DestinationPath { get; }
+
         public bool HealthCheck()
         {
-            throw new NotImplementedException();
+            return false;
         }
     }
 }

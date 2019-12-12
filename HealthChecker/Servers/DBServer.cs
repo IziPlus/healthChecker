@@ -1,18 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
+﻿
 namespace HealthChecker.Servers
 {
-    public class DBServer 
+    public class DBServer :IServer
     {
         public DBServer(string connectionString, string dBQuery)
         {
             ConnectionString = connectionString;
-            DBQuery = dBQuery;
+            DbQuery = dBQuery;
         }
         public string ConnectionString { get;  }
-        public string DBQuery { get;  }
+        public string DbQuery { get;  }
 
         public bool HealthCheck()
         {
